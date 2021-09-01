@@ -74,7 +74,7 @@ class SmsMessage implements Comparable<SmsMessage> {
       this._threadId = data["thread_id"];
     }
     if (data.containsKey("read")) {
-      this._read = data["read"] as int? == 1;
+      this._read = data["read"] as int == 1;
     }
     if (data.containsKey("kind")) {
       this._kind = data["kind"];
@@ -151,7 +151,7 @@ class SmsMessage implements Comparable<SmsMessage> {
   set date(DateTime? date) => this._date = date;
 
   /// Get message state
-  get state => this._state;
+  SmsMessageState get state => this._state;
 
   set state(SmsMessageState state) {
     if (this._state != state) {
@@ -575,11 +575,11 @@ class SimCardsProvider {
   SimCardsProvider._private(this._channel);
 
   Future<List<SimCard>> getSimCards() async {
-    final simCards = new List<SimCard>();
+    List<SimCard> simCards = [];
 
     dynamic response = await _channel.invokeMethod('getSimCards', null);
     for(Map map in response) {
-      simCards.add(new SimCard.fromJson(map));
+      simCards.add(SimCard.fromJson(map));
     }
 
     return simCards;

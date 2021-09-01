@@ -172,7 +172,7 @@ class UserProfile {
   Photo? _thumbnail;
   List<String>? _addresses;
 
-  UserProfile() : _addresses = new List<String>();
+  UserProfile() : _addresses = [];
 
   UserProfile._fromJson(Map data) {
     if (data.containsKey("name")) {
